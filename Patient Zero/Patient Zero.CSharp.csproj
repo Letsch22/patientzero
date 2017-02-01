@@ -65,8 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\Code\CameraControl.cs" />
     <Compile Include="Assets\Code\Projectile.cs" />
-    <Compile Include="Assets\Code\ScoreManager.cs" />
     <Compile Include="Assets\Code\TankControl.cs" />
+    <Compile Include="Assets\Code\Timer.cs" />
     <Compile Include="Assets\Code\WallOfDeath.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

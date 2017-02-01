@@ -54,16 +54,7 @@ public class TankControl : MonoBehaviour {
 
     internal void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.tag.Equals("Projectile"))
-        {
-            ScoreManager.IncreaseScore(obj.gameObject.GetComponent<Projectile>().Creator, 10);
-            Destroy(obj.gameObject);
-        }
-        if (obj.tag.Equals("Mine"))
-        {
-            ScoreManager.IncreaseScore(gameObject, -20);
-            Destroy(obj.gameObject);
-        }
+
     }
 
     /// <summary>
