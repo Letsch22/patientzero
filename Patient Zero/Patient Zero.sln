@@ -1,7 +1,7 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patient Zero.CSharp", "Patient Zero.CSharp.csproj", "{1DF1EA20-8226-72C8-C475-9892982565C9}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{C3D48F30-5B76-AD5B-ABCA-669A9D20244E}") = "Patient Zero", "Assembly-CSharp.csproj", "{CDDB5D9D-052C-27DE-B2C3-B91F8A4372A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1DF1EA20-8226-72C8-C475-9892982565C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DF1EA20-8226-72C8-C475-9892982565C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DF1EA20-8226-72C8-C475-9892982565C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DF1EA20-8226-72C8-C475-9892982565C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDB5D9D-052C-27DE-B2C3-B91F8A4372A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDB5D9D-052C-27DE-B2C3-B91F8A4372A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDB5D9D-052C-27DE-B2C3-B91F8A4372A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDB5D9D-052C-27DE-B2C3-B91F8A4372A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

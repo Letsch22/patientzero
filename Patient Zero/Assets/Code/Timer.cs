@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
     internal void Start()
     {
         time = 300f;
+		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 1, 1));
     }
 
     internal void Update()
