@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     internal void Start()
     {
         time = 300f;
-		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 1, 1));
+		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 12, 1));
     }
 
     internal void Update()
@@ -32,6 +32,6 @@ public class Timer : MonoBehaviour
         var fraction = Mathf.Floor((time*100)%100);
 
         //update the label value
-        timerLabel.text = string.Format("Time Left: {0:00} : {1:00} : {2:00}", minutes, seconds, fraction);
+        timerLabel.text = string.Format("{0:00} : {1:00} : {2:00}", minutes, seconds, fraction);
     }
 }

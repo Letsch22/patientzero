@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{C3D48F30-5B76-AD5B-ABCA-669A9D20244E}") = "Patient Zero", "Assembly-CSharp.csproj", "{CDDB5D9D-052C-27DE-B2C3-B91F8A4372A8}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patient Zero", "Assembly-CSharp.csproj", "{CDDB5D9D-052C-27DE-B2C3-B91F8A4372A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
