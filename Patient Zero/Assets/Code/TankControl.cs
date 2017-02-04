@@ -11,7 +11,12 @@ public class TankControl : MonoBehaviour {
     /// </summary>
     public float ForwardSpeed = 20f;
     public float SprintSpeed = 20f;
+    public LayerMask layerMask;
 
+    internal void Start()
+    {
+        layerMask = ~layerMask;
+    }
     /// <summary>
     /// Checks forward, turning, and fire keys to update tank position, rotation, and spawn projectiles
     /// </summary>
@@ -19,36 +24,43 @@ public class TankControl : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
         {
-            transform.position += SprintSpeed * Vector3.up * Time.deltaTime;
-
+            if (Physics2D.Raycast(transform.position, Vector3.up, SprintSpeed * Time.deltaTime, layerMask) == false)
+                transform.position += SprintSpeed * Vector3.up * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.W))
         {
-            transform.position += ForwardSpeed*Vector3.up*Time.deltaTime;
+            if (Physics2D.Raycast(transform.position, Vector3.up, ForwardSpeed * Time.deltaTime, layerMask) == false)
+                transform.position += ForwardSpeed * Vector3.up * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
         {
-            transform.position += SprintSpeed * Vector3.left * Time.deltaTime;
+            if (Physics2D.Raycast(transform.position, Vector3.left, SprintSpeed * Time.deltaTime, layerMask) == false)
+                transform.position += SprintSpeed * Vector3.left * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            transform.position += ForwardSpeed * Vector3.left * Time.deltaTime;
+            if (Physics2D.Raycast(transform.position, Vector3.left, ForwardSpeed * Time.deltaTime, layerMask) == false)
+                transform.position += ForwardSpeed * Vector3.left * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
         {
-            transform.position += SprintSpeed * Vector3.right * Time.deltaTime;
+            if (Physics2D.Raycast(transform.position, Vector3.right, SprintSpeed * Time.deltaTime, layerMask) == false)
+                transform.position += SprintSpeed * Vector3.right * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.position += ForwardSpeed * Vector3.right * Time.deltaTime;
+            if (Physics2D.Raycast(transform.position, Vector3.right, ForwardSpeed * Time.deltaTime, layerMask) == false)
+                transform.position += ForwardSpeed * Vector3.right * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
         {
-            transform.position += SprintSpeed * Vector3.down * Time.deltaTime;
+            if (Physics2D.Raycast(transform.position, Vector3.down, SprintSpeed * Time.deltaTime, layerMask) == false)
+                transform.position += SprintSpeed * Vector3.down * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            transform.position += ForwardSpeed * Vector3.down * Time.deltaTime;
+            if (Physics2D.Raycast(transform.position, Vector3.down, ForwardSpeed * Time.deltaTime, layerMask) == false)
+                transform.position += ForwardSpeed * Vector3.down * Time.deltaTime;
         }
     }
 
