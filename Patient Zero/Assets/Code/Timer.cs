@@ -13,10 +13,10 @@ public class Timer : MonoBehaviour
 
     public float time;
 
-    internal void Start()
+    internal void Awake()
     {
-        time = 300f;
 		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 12, 1));
+        time = 300f;
     }
 
     internal void Update()
