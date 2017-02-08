@@ -9,8 +9,8 @@ public class DiseaseControl : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    currentTime = FindObjectsOfType()<Timer>().GetComponent<Timer>();
-	    civilians = FindObjectsOfType<CivilianControl>();
+	 //   currentTime = FindObjectsOfType()<Timer>().GetComponent<Timer>();
+	   // civilians = FindObjectsOfType<CivilianControl>();
 	}
 	
 	// Update is called once per frame
