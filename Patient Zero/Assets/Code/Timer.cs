@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
 {
     public Text timerLabel;
 
-    private float time;
+    public float time;
 
     internal void Start()
     {
