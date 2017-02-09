@@ -5,27 +5,25 @@ using UnityEngine;
 public class DiseaseControl : MonoBehaviour
 {
     private float startTimer;
-    private float beginTime;
     private CivilianControl[] civilians;
     private int patientZeroIndex;
     private float spreadRate;
 	// Use this for initialization
 	void Start ()
 	{
-        civilians = FindObjectsOfType<CivilianControl>();
-	    Timer timerClass = FindObjectOfType<Timer>();
         startTimer = FindObjectOfType<Timer>().gameObject.GetComponent<Timer>().time;
-	    spreadRate = startTimer/(float)civilians.Length;
+        civilians = FindObjectsOfType<CivilianControl>();
+	    spreadRate = startTimer/((float)civilians.Length - 1f);
 	    patientZeroIndex = Random.Range(0, civilians.Length);
         civilians[patientZeroIndex].hasDisease = true;
 	    civilians[patientZeroIndex].GetComponent<SpriteRenderer>().color = Color.green;
-	    beginTime = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update ()
-    {
-        if (Time.time - beginTime > spreadRate)
+	{
+	    float currentTimer = FindObjectOfType<Timer>().gameObject.GetComponent<Timer>().time;
+        if (startTimer - currentTimer > spreadRate)
         {
             float closestToPatientZeroDistance = float.PositiveInfinity;
             CivilianControl closestToPatientZero = civilians[0];
@@ -41,7 +39,7 @@ public class DiseaseControl : MonoBehaviour
             }
             closestToPatientZero.hasDisease = true;
             closestToPatientZero.GetComponent<SpriteRenderer>().color = Color.red;
-            beginTime = Time.time;
+            startTimer = FindObjectOfType<Timer>().gameObject.GetComponent<Timer>().time;
         }
 	}
 }
