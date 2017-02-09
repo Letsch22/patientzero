@@ -9,8 +9,8 @@ public class PlayerControl : MonoBehaviour {
     /// <summary>
     /// How fast to drive
     /// </summary>
-    public float ForwardSpeed = 20f;
-    public float SprintSpeed = 20f;
+    public float ForwardSpeed = 10f;
+    public float SprintSpeed = 25f;
     public LayerMask layerMask;
     private Animator animator;
 
@@ -30,72 +30,49 @@ public class PlayerControl : MonoBehaviour {
         animator.SetBool("movingDown", false);
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
         {
-            if (Physics2D.Raycast(transform.position, Vector3.up, SprintSpeed * Time.deltaTime, layerMask) == false)
-                transform.position += SprintSpeed * Vector3.up * Time.deltaTime;
-            animator.SetBool("movingUp", true);
+            move(SprintSpeed, Vector3.up, "movingUp");
         }
         else if (Input.GetKey(KeyCode.W))
         {
-            if (Physics2D.Raycast(transform.position, Vector3.up, ForwardSpeed * Time.deltaTime, layerMask) == false)
-                transform.position += ForwardSpeed * Vector3.up * Time.deltaTime;
-            animator.SetBool("movingUp", true);
+            move(ForwardSpeed, Vector3.up, "movingUp");
         }
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
         {
-            if (Physics2D.Raycast(transform.position, Vector3.left, SprintSpeed * Time.deltaTime, layerMask) == false)
-                transform.position += SprintSpeed * Vector3.left * Time.deltaTime;
-            animator.SetBool("movingLeft", true);
+            move(SprintSpeed, Vector3.left, "movingLeft");
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            if (Physics2D.Raycast(transform.position, Vector3.left, ForwardSpeed * Time.deltaTime, layerMask) == false)
-                transform.position += ForwardSpeed * Vector3.left * Time.deltaTime;
-            animator.SetBool("movingLeft", true);
+            move(ForwardSpeed, Vector3.left, "movingLeft");
         }
         if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
         {
-            if (Physics2D.Raycast(transform.position, Vector3.right, SprintSpeed * Time.deltaTime, layerMask) == false)
-                transform.position += SprintSpeed * Vector3.right * Time.deltaTime;
-            animator.SetBool("movingRight", true);
+            move(SprintSpeed, Vector3.right, "movingRight");
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            if (Physics2D.Raycast(transform.position, Vector3.right, ForwardSpeed * Time.deltaTime, layerMask) == false)
-                transform.position += ForwardSpeed * Vector3.right * Time.deltaTime;
-            animator.SetBool("movingRight", true);
+            move(ForwardSpeed, Vector3.right, "movingRight");
         }
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
         {
-            if (Physics2D.Raycast(transform.position, Vector3.down, SprintSpeed * Time.deltaTime, layerMask) == false)
-                transform.position += SprintSpeed * Vector3.down * Time.deltaTime;
-            animator.SetBool("movingDown", true);
+            move(SprintSpeed, Vector3.down, "movingDown");
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            if (Physics2D.Raycast(transform.position, Vector3.down, ForwardSpeed * Time.deltaTime, layerMask) == false)
-                transform.position += ForwardSpeed * Vector3.down * Time.deltaTime;
-            animator.SetBool("movingDown", true);
+            move(ForwardSpeed, Vector3.down, "movingDown");
         }
     }
+
+    private void move(float speed, Vector3 direction, string animationVariable)
+    {
+        if (Physics2D.Raycast(transform.position, direction, speed*Time.deltaTime, layerMask) == false)
+            transform.position += speed*direction*Time.deltaTime;
+        animator.SetBool(animationVariable, true);
+    }
+
 
     internal void OnTriggerEnter2D(Collider2D obj)
     {
 
     }
 
-    /// <summary>
-    /// Current rotation of the tank (in degrees).
-    /// We need this because Unity's 2D system is built on top of its 3D system and so they don't
-    /// give you a method for finding the rotation that doesn't require you to know what a quaternion
-    /// is and what Euler angles are.  We haven't talked about those yet.
-    /// </summary>
-    private float Rotation {
-        get
-        {
-            return transform.rotation.eulerAngles.z;
-        }
-        set {
-            transform.rotation = Quaternion.Euler(new Vector3 (0, 0, value)); // don't worry about this just yet
-        }
-    }
 }
