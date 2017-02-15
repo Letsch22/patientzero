@@ -13,14 +13,13 @@ public class PlayerControl : MonoBehaviour {
     public float SprintSpeed = 25f;
     public LayerMask layerMask;
     private Animator animator;
-    private GameLog gameLog;
     private PlayerHealth playerHealth;
 
     internal void Start()
     {
         layerMask = ~layerMask;
         animator = GetComponent<Animator>();
-        gameLog = FindObjectOfType<GameLog>().GetComponent<GameLog>();
+        
         playerHealth = FindObjectOfType<PlayerHealth>().GetComponent<PlayerHealth>();
     }
     /// <summary>
@@ -84,14 +83,12 @@ public class PlayerControl : MonoBehaviour {
             }
             if (closestCivilian != null && closestCivilian.GetComponent<CivilianControl>().hasDisease)
             {
-                gameLog.logText.text = "I was infected " + closestCivilian.GetComponent<CivilianControl>().timeSinceInfected + " seconds ago!";
-                closestCivilian.GetComponent<CivilianControl>().hasBeenInspected = true;
+                closestCivilian.GetComponent<CivilianControl>().inspect();
                 playerHealth.reduceHealth(10);
             }
             else if (closestCivilian != null)
             {
-                gameLog.logText.text = "I'm healthy bruh...";
-                closestCivilian.GetComponent<CivilianControl>().hasBeenInspected = true;
+                closestCivilian.GetComponent<CivilianControl>().inspect();
             }
         }
     }

@@ -15,6 +15,7 @@ public class CivilianControl : MonoBehaviour
     private Animator animator;
     private int timeToWander = 2;
     public GameObject inspectedIndicatorPrefab;
+    private GameLog gameLog;
     // Use this for initialization
     void Start ()
 	{
@@ -24,8 +25,8 @@ public class CivilianControl : MonoBehaviour
         animator = GetComponent<Animator>();
 	    inspectedIndicatorPrefab = Instantiate(inspectedIndicatorPrefab);
 	    inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = false;
-
-	}
+        gameLog = FindObjectOfType<GameLog>().GetComponent<GameLog>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -35,8 +36,6 @@ public class CivilianControl : MonoBehaviour
 	    }
 	    if (hasBeenInspected)
 	    {
-	        inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = true;
-	        //Vector3 wantedPos = Camera.main.WorldToScreenPoint();
 	        inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
 	    }
         animator.SetBool("movingUp", false);
@@ -86,5 +85,21 @@ public class CivilianControl : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public void inspect()
+    {
+        inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = true;
+        inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
+        if (hasDisease)
+        {
+            inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().color = Color.red;
+            gameLog.logText.text = "I was infected " + timeSinceInfected + " seconds ago!";
+        }
+        else
+        {
+            gameLog.logText.text = "I'm healthy bruh...";
+        }
+        hasBeenInspected = true;
     }
 }
