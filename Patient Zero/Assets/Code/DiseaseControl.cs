@@ -17,7 +17,7 @@ public class DiseaseControl : MonoBehaviour
 	    patientZeroIndex = Random.Range(0, civilians.Length);
         civilians[patientZeroIndex].hasDisease = true;
 	    civilians[patientZeroIndex].GetComponent<CivilianControl>().isPatientZero = true;
-	    civilians[patientZeroIndex].GetComponent<SpriteRenderer>().color = Color.green;
+	    //civilians[patientZeroIndex].GetComponent<SpriteRenderer>().color = Color.green;
 	}
 	
 	// Update is called once per frame
@@ -39,7 +39,7 @@ public class DiseaseControl : MonoBehaviour
                 }
             }
             closestToPatientZero.hasDisease = true;
-            closestToPatientZero.GetComponent<SpriteRenderer>().color = Color.red;
+            //closestToPatientZero.GetComponent<SpriteRenderer>().color = Color.red;
             startTimer = FindObjectOfType<Timer>().gameObject.GetComponent<Timer>().time;
         }
 	}
