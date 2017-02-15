@@ -16,6 +16,7 @@ public class DiseaseControl : MonoBehaviour
 	    spreadRate = startTimer/((float)civilians.Length - 1f);
 	    patientZeroIndex = Random.Range(0, civilians.Length);
         civilians[patientZeroIndex].hasDisease = true;
+	    civilians[patientZeroIndex].GetComponent<CivilianControl>().isPatientZero = true;
 	    civilians[patientZeroIndex].GetComponent<SpriteRenderer>().color = Color.green;
 	}
 	

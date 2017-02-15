@@ -13,14 +13,17 @@ public class PlayerControl : MonoBehaviour {
     public float SprintSpeed = 25f;
     public LayerMask layerMask;
     private Animator animator;
-    private PlayerHealth playerHealth;
+    private PlayerStats playerStats;
+    private Timer timer;
+    private GameLog gameLog;
 
     internal void Start()
     {
         layerMask = ~layerMask;
         animator = GetComponent<Animator>();
-        
-        playerHealth = FindObjectOfType<PlayerHealth>().GetComponent<PlayerHealth>();
+        gameLog = FindObjectOfType<GameLog>().GetComponent<GameLog>();
+        playerStats = FindObjectOfType<PlayerStats>().GetComponent<PlayerStats>();
+        timer = FindObjectOfType<Timer>().GetComponent<Timer>();
     }
     /// <summary>
     /// Checks forward, turning, and fire keys to update tank position, rotation, and spawn projectiles
@@ -65,30 +68,28 @@ public class PlayerControl : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 3, layerMask);
-            GameObject closestCivilian = null;
-            float closestCivilianDistance = float.PositiveInfinity;
-            foreach (Collider2D collider in colliders)
-            {
-                if (collider.gameObject.tag.Equals("Civilian"))
-                {
-                    GameObject civilian = collider.gameObject;
-                    float distanceToCivilian = Vector3.Distance(transform.position, civilian.transform.position);
-                    if (distanceToCivilian < closestCivilianDistance)
-                    {
-                        closestCivilian = civilian;
-                        closestCivilianDistance = distanceToCivilian;
-                    }
-                }
-            }
+            GameObject closestCivilian = getCloesestCivilian();
             if (closestCivilian != null && closestCivilian.GetComponent<CivilianControl>().hasDisease)
             {
                 closestCivilian.GetComponent<CivilianControl>().inspect();
-                playerHealth.reduceHealth(10);
+                playerStats.reduceHealth(10);
             }
             else if (closestCivilian != null)
             {
                 closestCivilian.GetComponent<CivilianControl>().inspect();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            GameObject closestCivilian = getCloesestCivilian();
+            if (closestCivilian != null && closestCivilian.GetComponent<CivilianControl>().isPatientZero)
+            {
+                timer.GameOver(true);
+            }
+            else if (closestCivilian != null)
+            {
+                playerStats.useVaccine();
+                gameLog.logText.text = "I'm not Patient Zero!";
             }
         }
     }
@@ -98,6 +99,27 @@ public class PlayerControl : MonoBehaviour {
         if (Physics2D.Raycast(transform.position, direction, speed*Time.deltaTime, layerMask) == false)
             transform.position += speed*direction*Time.deltaTime;
         animator.SetBool(animationVariable, true);
+    }
+
+    private GameObject getCloesestCivilian()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 3, layerMask);
+        GameObject closestCivilian = null;
+        float closestCivilianDistance = float.PositiveInfinity;
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject.tag.Equals("Civilian"))
+            {
+                GameObject civilian = collider.gameObject;
+                float distanceToCivilian = Vector3.Distance(transform.position, civilian.transform.position);
+                if (distanceToCivilian < closestCivilianDistance)
+                {
+                    closestCivilian = civilian;
+                    closestCivilianDistance = distanceToCivilian;
+                }
+            }
+        }
+        return closestCivilian;
     }
 
 

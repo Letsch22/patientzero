@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CivilianControl : MonoBehaviour
 {
-
+    public bool isPatientZero;
     public bool hasDisease;
     public bool hasBeenInspected = false;
     public float timeSinceInfected = 0f;
@@ -18,7 +18,7 @@ public class CivilianControl : MonoBehaviour
     private GameLog gameLog;
     // Use this for initialization
     void Start ()
-	{
+    {
 	    hasDisease = false;
 	    behaviorSet = false;
 	    hasBeenInspected = false;
