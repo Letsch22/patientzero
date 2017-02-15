@@ -13,11 +13,15 @@ public class PlayerControl : MonoBehaviour {
     public float SprintSpeed = 25f;
     public LayerMask layerMask;
     private Animator animator;
+    private GameLog gameLog;
+    private PlayerHealth playerHealth;
 
     internal void Start()
     {
         layerMask = ~layerMask;
         animator = GetComponent<Animator>();
+        gameLog = FindObjectOfType<GameLog>().GetComponent<GameLog>();
+        playerHealth = FindObjectOfType<PlayerHealth>().GetComponent<PlayerHealth>();
     }
     /// <summary>
     /// Checks forward, turning, and fire keys to update tank position, rotation, and spawn projectiles
@@ -59,6 +63,36 @@ public class PlayerControl : MonoBehaviour {
         else if (Input.GetKey(KeyCode.S))
         {
             move(ForwardSpeed, Vector3.down, "movingDown");
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 3, layerMask);
+            GameObject closestCivilian = null;
+            float closestCivilianDistance = float.PositiveInfinity;
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.gameObject.tag.Equals("Civilian"))
+                {
+                    GameObject civilian = collider.gameObject;
+                    float distanceToCivilian = Vector3.Distance(transform.position, civilian.transform.position);
+                    if (distanceToCivilian < closestCivilianDistance)
+                    {
+                        closestCivilian = civilian;
+                        closestCivilianDistance = distanceToCivilian;
+                    }
+                }
+            }
+            if (closestCivilian != null && closestCivilian.GetComponent<CivilianControl>().hasDisease)
+            {
+                gameLog.logText.text = "I was infected " + closestCivilian.GetComponent<CivilianControl>().timeSinceInfected + " seconds ago!";
+                closestCivilian.GetComponent<CivilianControl>().hasBeenInspected = true;
+                playerHealth.reduceHealth(10);
+            }
+            else if (closestCivilian != null)
+            {
+                gameLog.logText.text = "I'm healthy bruh...";
+                closestCivilian.GetComponent<CivilianControl>().hasBeenInspected = true;
+            }
         }
     }
 

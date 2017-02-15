@@ -6,22 +6,39 @@ public class CivilianControl : MonoBehaviour
 {
 
     public bool hasDisease;
+    public bool hasBeenInspected = false;
+    public float timeSinceInfected = 0f;
     public float ForwardSpeed = 5f;
     private bool behaviorSet;
     private int behavior = 0;
     private float timeStart;
     private Animator animator;
     private int timeToWander = 2;
+    public GameObject inspectedIndicatorPrefab;
     // Use this for initialization
     void Start ()
 	{
 	    hasDisease = false;
 	    behaviorSet = false;
+	    hasBeenInspected = false;
         animator = GetComponent<Animator>();
-    }
+	    inspectedIndicatorPrefab = Instantiate(inspectedIndicatorPrefab);
+	    inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = false;
+
+	}
 	
 	// Update is called once per frame
 	void Update () {
+	    if (hasDisease)
+	    {
+	        timeSinceInfected += Time.deltaTime;
+	    }
+	    if (hasBeenInspected)
+	    {
+	        inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = true;
+	        //Vector3 wantedPos = Camera.main.WorldToScreenPoint();
+	        inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
+	    }
         animator.SetBool("movingUp", false);
         animator.SetBool("movingRight", false);
         animator.SetBool("movingLeft", false);
