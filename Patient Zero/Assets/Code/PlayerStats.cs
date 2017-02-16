@@ -15,8 +15,8 @@ public class PlayerStats : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(13, 12, 1));
-        vaccinesLabel.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(13, 12, 1));
+        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(11.5f, 11.5f, 1));
+        vaccinesLabel.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(11.5f, 11.5f, 1));
         healthLabel.text = "Health: " + health;
         vaccinesLabel.text = "Vaccines Left: " + numVaccines;
         timer = FindObjectOfType<Timer>().GetComponent<Timer>();

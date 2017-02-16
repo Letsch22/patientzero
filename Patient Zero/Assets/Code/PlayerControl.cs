@@ -72,7 +72,7 @@ public class PlayerControl : MonoBehaviour {
             if (closestCivilian != null && closestCivilian.GetComponent<CivilianControl>().hasDisease)
             {
                 closestCivilian.GetComponent<CivilianControl>().inspect();
-                playerStats.reduceHealth(10);
+                playerStats.reduceHealth(20);
             }
             else if (closestCivilian != null)
             {

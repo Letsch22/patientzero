@@ -10,7 +10,7 @@ public class GameLog : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 1.5f, 1));
+        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2.5f, 1.5f, 1));
     }
 	
 	// Update is called once per frame
