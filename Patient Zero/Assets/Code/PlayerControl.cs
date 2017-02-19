@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour {
     /// </summary>
     public float ForwardSpeed = 10f;
     public float SprintSpeed = 25f;
+	public ItemControl item;
     public LayerMask layerMask;
     private Animator animator;
     private PlayerStats playerStats;
@@ -96,7 +97,8 @@ public class PlayerControl : MonoBehaviour {
 
     private void move(float speed, Vector3 direction, string animationVariable)
     {
-        if (Physics2D.Raycast(transform.position, direction, speed*Time.deltaTime, layerMask) == false)
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, direction, speed * Time.deltaTime, layerMask);
+		if (hit == false || hit.collider.isTrigger == true)
             transform.position += speed*direction*Time.deltaTime;
         animator.SetBool(animationVariable, true);
     }

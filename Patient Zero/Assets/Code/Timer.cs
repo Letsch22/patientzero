@@ -12,21 +12,25 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     public Text timerLabel;
-
     public Text gameOverText;
-
     public float time;
+	private bool hasSpawnedDiseaseVision;
+	private Image timerBar;
 
     internal void Awake()
     {
 //		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 11.5f, 1));
         time = 240f;
+		timerBar = GameObject.FindGameObjectWithTag ("TimerBar").GetComponent<Image>();
+		timerBar.fillAmount = 0;
     }
 
     internal void Update()
     {
         
         time -= Time.deltaTime;
+
+		timerBar.fillAmount = 1 - (time / 240f);
 
         var minutes = Mathf.Floor(time/60); 
         var seconds = time%60; 
@@ -41,6 +45,14 @@ public class Timer : MonoBehaviour
             //update the label value
             timerLabel.text = string.Format("{0:00} : {1:00} : {2:00}", minutes, seconds, fraction);
         }
+
+		// spawning disease vision item
+		if (time <= 120f && hasSpawnedDiseaseVision == false) {
+			DiseaseVisionItem diseaseVision = FindObjectOfType<DiseaseVisionItem> ();
+			diseaseVision.EnablePickup (true);
+			hasSpawnedDiseaseVision = true;
+		}
+
     }
 
     public void GameOver(bool iWon)

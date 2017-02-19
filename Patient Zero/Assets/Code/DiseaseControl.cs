@@ -8,6 +8,9 @@ public class DiseaseControl : MonoBehaviour
     private CivilianControl[] civilians;
     private int patientZeroIndex;
     private float spreadRate;
+	public bool hasDiseaseVision;
+	private List<CivilianControl> infectedCivilians;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -17,7 +20,9 @@ public class DiseaseControl : MonoBehaviour
 	    patientZeroIndex = Random.Range(0, civilians.Length);
         civilians[patientZeroIndex].hasDisease = true;
 	    civilians[patientZeroIndex].GetComponent<CivilianControl>().isPatientZero = true;
-	    //civilians[patientZeroIndex].GetComponent<SpriteRenderer>().color = Color.green;
+//	    civilians[patientZeroIndex].GetComponent<SpriteRenderer>().color = Color.green;
+		infectedCivilians = new List<CivilianControl>();
+		infectedCivilians.Add (civilians [patientZeroIndex]);
 	}
 	
 	// Update is called once per frame
@@ -39,8 +44,17 @@ public class DiseaseControl : MonoBehaviour
                 }
             }
             closestToPatientZero.hasDisease = true;
-            //closestToPatientZero.GetComponent<SpriteRenderer>().color = Color.red;
+			infectedCivilians.Add (closestToPatientZero);
+			if (hasDiseaseVision) {
+				closestToPatientZero.GetComponent<SpriteRenderer>().color = Color.red;
+			}
             startTimer = FindObjectOfType<Timer>().gameObject.GetComponent<Timer>().time;
         }
+	}
+
+	public void ColorInfectedCivilians(Color color) {
+		foreach (CivilianControl civ in infectedCivilians) {
+			civ.GetComponent<SpriteRenderer> ().color = Color.red;
+		}
 	}
 }
