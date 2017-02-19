@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
 
     internal void Awake()
     {
-		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 11.5f, 1));
+//		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 11.5f, 1));
         time = 240f;
     }
 
