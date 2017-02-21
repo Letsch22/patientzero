@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour {
         animator.SetBool("movingRight", false);
         animator.SetBool("movingLeft", false);
         animator.SetBool("movingDown", false);
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.W) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
             move(SprintSpeed, Vector3.up, "movingUp");
         }
@@ -43,7 +43,7 @@ public class PlayerControl : MonoBehaviour {
         {
             move(ForwardSpeed, Vector3.up, "movingUp");
         }
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.A) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
             move(SprintSpeed, Vector3.left, "movingLeft");
         }
@@ -51,7 +51,7 @@ public class PlayerControl : MonoBehaviour {
         {
             move(ForwardSpeed, Vector3.left, "movingLeft");
         }
-        if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.D) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
             move(SprintSpeed, Vector3.right, "movingRight");
         }
@@ -59,7 +59,7 @@ public class PlayerControl : MonoBehaviour {
         {
             move(ForwardSpeed, Vector3.right, "movingRight");
         }
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.S) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
             move(SprintSpeed, Vector3.down, "movingDown");
         }
@@ -80,7 +80,7 @@ public class PlayerControl : MonoBehaviour {
                 closestCivilian.GetComponent<CivilianControl>().inspect();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             GameObject closestCivilian = getCloesestCivilian();
             if (closestCivilian != null && closestCivilian.GetComponent<CivilianControl>().isPatientZero)
