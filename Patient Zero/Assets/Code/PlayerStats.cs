@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour
     private Timer timer;
     public Text vaccinesLabel;
     public int numVaccines;
+    private Image hearts;
 
 	// Use this for initialization
 	void Start ()
@@ -20,7 +21,8 @@ public class PlayerStats : MonoBehaviour
         healthLabel.text = "Health: " + health;
         vaccinesLabel.text = "Vaccines Left: " + numVaccines;
         timer = FindObjectOfType<Timer>().GetComponent<Timer>();
-	}
+        hearts = GameObject.FindGameObjectWithTag("Hearts").GetComponent<Image>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,6 +33,7 @@ public class PlayerStats : MonoBehaviour
     {
         health -= amount;
         healthLabel.text = "Health: " + health;
+        hearts.fillAmount = health/100f;
         if (health <= 0)
         {
             timer.GameOver(false);

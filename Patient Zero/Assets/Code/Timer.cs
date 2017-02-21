@@ -15,7 +15,9 @@ public class Timer : MonoBehaviour
     public Text gameOverText;
     public float time;
 	private bool hasSpawnedDiseaseVision;
+    private bool hasSpawnedHeart;
 	private Image timerBar;
+    private PlayerStats playerStats;
 
     internal void Awake()
     {
@@ -23,6 +25,7 @@ public class Timer : MonoBehaviour
         time = 240f;
 		timerBar = GameObject.FindGameObjectWithTag ("TimerBar").GetComponent<Image>();
 		timerBar.fillAmount = 0;
+        playerStats = FindObjectOfType<PlayerStats>();
     }
 
     internal void Update()
@@ -52,6 +55,13 @@ public class Timer : MonoBehaviour
 			diseaseVision.EnablePickup (true);
 			hasSpawnedDiseaseVision = true;
 		}
+        // spawning heart item
+        if (time <= 180f && hasSpawnedHeart == false && playerStats.health < 100)
+        {
+            HeartItem heartItem = FindObjectOfType<HeartItem>();
+            heartItem.EnablePickup(true);
+            hasSpawnedHeart = true;
+        }
 
     }
 
