@@ -43,11 +43,24 @@ public class CameraControl : MonoBehaviour {
         Camera.main.orthographicSize++;
     }
 
+    private void ZoomIn()
+    {
+        Camera.main.orthographicSize--;
+    }
+
     /// <summary>
     /// Sets camera's poistion to a weighted average of current position and target position.
     /// </summary>
     internal void Update()
     {
         transform.position = Vector3.Lerp(transform.position, Target.position + offsetFromTarget, Smoothing*Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ZoomOut();
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ZoomIn();
+        }
     }
 }
