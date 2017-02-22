@@ -12,9 +12,11 @@ public class CivilianControl : MonoBehaviour
     private bool behaviorSet;
     private int behavior = 0;
     private float timeStart;
+    private float nextFootprint;
     private Animator animator;
     private int timeToWander = 2;
     public GameObject inspectedIndicatorPrefab;
+    public GameObject footprintsPrefab;
     private GameLog gameLog;
     // Use this for initialization
     void Start ()
@@ -70,15 +72,24 @@ public class CivilianControl : MonoBehaviour
     private bool wander(float speed, float timeStart, float timeToWander, Vector3 initialDirection, Vector3 returnDirection, 
         string initialAnimationVariable, string returnAnimationVariable)
     {
+        Vector3 footprintDirection = Vector3.up;
         if (Time.time - timeStart < timeToWander)
         {
+            footprintDirection = initialDirection;
             transform.position += speed * initialDirection*Time.deltaTime;
             animator.SetBool(initialAnimationVariable, true);
         }
         else if (Time.time - timeStart < timeToWander*2)
         {
+            footprintDirection = returnDirection;
             transform.position += speed * returnDirection*Time.deltaTime;
             animator.SetBool(returnAnimationVariable, true);
+        }
+        if (Time.time > nextFootprint && hasBeenInspected)
+        {
+            GameObject footprint = Instantiate(footprintsPrefab, transform.position + new Vector3(0, -1.1f, 1), Quaternion.FromToRotation(Vector3.up, footprintDirection));
+            nextFootprint = Time.time + 1;
+            StartCoroutine(WaitAndDestory(10, footprint));
         }
         else if (Time.time - timeStart >= timeToWander*2)
         {
@@ -104,5 +115,16 @@ public class CivilianControl : MonoBehaviour
             gameLog.logText.text = "I'm healthy bruh...";
         }
         hasBeenInspected = true;
+    }
+
+    IEnumerator WaitAndDestory(float secs, GameObject obj)
+    {
+        for (float i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(secs/10f);
+            obj.GetComponent<SpriteRenderer>().color = new Color(0,0,0,1f-(i*0.1f));
+        }
+        yield return new WaitForSeconds(secs/10f);
+        Destroy(obj);
     }
 }
