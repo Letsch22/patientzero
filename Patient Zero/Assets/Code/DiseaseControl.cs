@@ -47,7 +47,8 @@ public class DiseaseControl : MonoBehaviour
 			infectedCivilians.Add (closestToPatientZero);
 			if (hasDiseaseVision) {
 				closestToPatientZero.GetComponent<SpriteRenderer>().color = Color.red;
-			}
+                closestToPatientZero.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            }
             startTimer = FindObjectOfType<Timer>().gameObject.GetComponent<Timer>().time;
         }
 	}
@@ -55,6 +56,7 @@ public class DiseaseControl : MonoBehaviour
 	public void ColorInfectedCivilians(Color color) {
 		foreach (CivilianControl civ in infectedCivilians) {
 			civ.GetComponent<SpriteRenderer> ().color = Color.red;
-		}
+            civ.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        }
 	}
 }

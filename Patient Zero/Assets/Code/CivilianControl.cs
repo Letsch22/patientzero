@@ -94,10 +94,13 @@ public class CivilianControl : MonoBehaviour
         if (hasDisease)
         {
             inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().color = Color.red;
-			gameLog.logText.text = "I was infected " + (int)timeSinceInfected + " seconds ago!";
+            gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+
+            gameLog.logText.text = "I was infected " + (int)timeSinceInfected + " seconds ago!";
         }
         else
         {
+            gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(33/255f, 64/255f, 156/255f);
             gameLog.logText.text = "I'm healthy bruh...";
         }
         hasBeenInspected = true;
