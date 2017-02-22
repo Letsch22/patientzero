@@ -40,12 +40,18 @@ public class CameraControl : MonoBehaviour {
     /// Zoom out a little
     /// </summary>
     private void ZoomOut(){
-        Camera.main.orthographicSize++;
+        if (Camera.main.orthographicSize < 52)
+        {
+            Camera.main.orthographicSize++;
+        }
     }
 
     private void ZoomIn()
     {
-        Camera.main.orthographicSize--;
+        if (Camera.main.orthographicSize > 8)
+        {
+            Camera.main.orthographicSize--;
+        }
     }
 
     /// <summary>
@@ -54,11 +60,11 @@ public class CameraControl : MonoBehaviour {
     internal void Update()
     {
         transform.position = Vector3.Lerp(transform.position, Target.position + offsetFromTarget, Smoothing*Time.deltaTime);
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             ZoomOut();
         }
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             ZoomIn();
         }
