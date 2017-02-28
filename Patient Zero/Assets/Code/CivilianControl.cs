@@ -17,7 +17,11 @@ public class CivilianControl : MonoBehaviour
     private int timeToWander = 2;
     public GameObject inspectedIndicatorPrefab;
     public GameObject footprintsPrefab;
+    public GameObject speechBubblePrefab;
+    public GameObject speechTextPrefab;
     private GameLog gameLog;
+    private Vector3 healthyBubbleScale;
+    private Vector3 unhealthyBubbleScale;
     // Use this for initialization
     void Start ()
     {
@@ -27,7 +31,12 @@ public class CivilianControl : MonoBehaviour
         animator = GetComponent<Animator>();
 	    inspectedIndicatorPrefab = Instantiate(inspectedIndicatorPrefab);
 	    inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = false;
+        speechBubblePrefab = Instantiate(speechBubblePrefab);
+        speechBubblePrefab.GetComponent<SpriteRenderer>().enabled = false;
+        speechTextPrefab = Instantiate(speechTextPrefab);
         gameLog = FindObjectOfType<GameLog>().GetComponent<GameLog>();
+        healthyBubbleScale = speechBubblePrefab.transform.localScale - new Vector3(2, 0);
+        unhealthyBubbleScale = speechBubblePrefab.transform.localScale;
     }
 	
 	// Update is called once per frame
@@ -35,11 +44,21 @@ public class CivilianControl : MonoBehaviour
 	    if (hasDisease)
 	    {
 	        timeSinceInfected += Time.deltaTime;
+	        speechBubblePrefab.gameObject.transform.position = transform.position + new Vector3(4.5f, 4.8f, -1f);
+            speechTextPrefab.gameObject.transform.position = transform.position + new Vector3(-3, 7.5f, -2f);
+            speechBubblePrefab.transform.localScale = unhealthyBubbleScale;
+        }
+	    else
+	    {
+            speechBubblePrefab.gameObject.transform.position = transform.position + new Vector3(2.75f, 4.8f, -1f);
+            speechTextPrefab.gameObject.transform.position = transform.position + new Vector3(-2, 7.5f, -2f);
+	        speechBubblePrefab.transform.localScale = healthyBubbleScale;
 	    }
 	    if (hasBeenInspected)
 	    {
 	        inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
 	    }
+	    
         animator.SetBool("movingUp", false);
         animator.SetBool("movingRight", false);
         animator.SetBool("movingLeft", false);
@@ -100,17 +119,21 @@ public class CivilianControl : MonoBehaviour
 
     public void inspect()
     {
+        speechBubblePrefab.GetComponent<SpriteRenderer>().enabled = true;
         inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = true;
         inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
         if (hasDisease)
         {
+            speechTextPrefab.GetComponent<TextMesh>().text = "I was infected " + (int)timeSinceInfected + "\nseconds ago!";
+            StartCoroutine(WaitAndRemoveSpeech(5));
             inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().color = Color.red;
             gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-
             gameLog.logText.text = "I was infected " + (int)timeSinceInfected + " seconds ago!";
         }
         else
         {
+            speechTextPrefab.GetComponent<TextMesh>().text = "I'm healthy...";
+            StartCoroutine(WaitAndRemoveSpeech(3));
             gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(33/255f, 64/255f, 156/255f);
             gameLog.logText.text = "I'm healthy bruh...";
         }
@@ -126,5 +149,13 @@ public class CivilianControl : MonoBehaviour
         }
         yield return new WaitForSeconds(secs/10f);
         Destroy(obj);
+    }
+
+    IEnumerator WaitAndRemoveSpeech(float secs)
+    {
+        yield return new WaitForSeconds(secs);
+        speechBubblePrefab.GetComponent<SpriteRenderer>().enabled = false;
+        speechTextPrefab.GetComponent<TextMesh>().text = "";
+        
     }
 }

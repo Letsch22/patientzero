@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Code\CameraControl.cs" />
+    <Compile Include="Assets\Code\ChangeScene.cs" />
     <Compile Include="Assets\Code\CivilianControl.cs" />
     <Compile Include="Assets\Code\DiseaseControl.cs" />
     <Compile Include="Assets\Code\DiseaseVisionItem.cs" />

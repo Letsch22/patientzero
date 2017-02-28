@@ -69,19 +69,11 @@ public class Timer : MonoBehaviour
     {
         if (iWon)
         {
-            gameOverText.text = "You vaccinated Patient Zero!\nYou Won!\nThe game will restart soon.";
-            StartCoroutine(WaitAndRestart(5));
+            SceneManager.LoadScene(3);
         }
         else
         {
-            gameOverText.text = "Game Over!\nThe game will restart soon.";
-            StartCoroutine(WaitAndRestart(5));
+            SceneManager.LoadScene(4);
         }
-    }
-
-    IEnumerator WaitAndRestart(float secs)
-    {
-        yield return new WaitForSeconds(secs);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
