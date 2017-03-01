@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CivilianControl : MonoBehaviour
+public abstract class CivilianControl : MonoBehaviour
 {
     public bool isPatientZero;
     public bool hasDisease;
     public bool hasBeenInspected = false;
     public float timeSinceInfected = 0f;
     public float ForwardSpeed = 5f;
-    private bool behaviorSet;
-    private int behavior = 0;
-    private float timeStart;
     private float nextFootprint;
-    private Animator animator;
-    private int timeToWander = 2;
+    protected Animator animator;
     public GameObject inspectedIndicatorPrefab;
     public GameObject footprintsPrefab;
     public GameObject speechBubblePrefab;
@@ -22,11 +18,10 @@ public class CivilianControl : MonoBehaviour
     private GameLog gameLog;
     private Vector3 healthyBubbleScale;
     private Vector3 unhealthyBubbleScale;
-    // Use this for initialization
-    void Start ()
+
+    internal void Start ()
     {
 	    hasDisease = false;
-	    behaviorSet = false;
 	    hasBeenInspected = false;
         animator = GetComponent<Animator>();
 	    inspectedIndicatorPrefab = Instantiate(inspectedIndicatorPrefab);
@@ -39,8 +34,7 @@ public class CivilianControl : MonoBehaviour
         unhealthyBubbleScale = speechBubblePrefab.transform.localScale;
     }
 	
-	// Update is called once per frame
-	void Update () {
+	internal void Update () {
 	    if (hasDisease)
 	    {
 	        timeSinceInfected += Time.deltaTime;
@@ -63,58 +57,22 @@ public class CivilianControl : MonoBehaviour
         animator.SetBool("movingRight", false);
         animator.SetBool("movingLeft", false);
         animator.SetBool("movingDown", false);
-        if (!behaviorSet)
-	    {
-	        behavior = Random.Range(0, 3);
-	        behaviorSet = true;
-	        timeStart = Time.time;
-	        timeToWander = Random.Range(2, 5);
-	    }
-	    if (behavior == 0)
-	    {
-	        behaviorSet = wander(ForwardSpeed, timeStart, timeToWander, Vector3.up, Vector3.down, "movingUp", "movingDown");
-	    }
-        if (behavior == 1)
-        {
-            behaviorSet = wander(ForwardSpeed, timeStart, timeToWander, Vector3.left, Vector3.right, "movingLeft", "movingRight");
-        }
-        if (behavior == 2)
-        {
-            behaviorSet = wander(ForwardSpeed, timeStart, timeToWander, Vector3.right, Vector3.left, "movingRight", "movingLeft");
-        }
-        if (behavior == 3)
-        {
-            behaviorSet = wander(ForwardSpeed, timeStart, timeToWander, Vector3.down, Vector3.up, "movingDown", "movingUp");
-        }
-    }
+        engageBehavior();
+	}
 
-    private bool wander(float speed, float timeStart, float timeToWander, Vector3 initialDirection, Vector3 returnDirection, 
-        string initialAnimationVariable, string returnAnimationVariable)
+    internal abstract void engageBehavior();
+
+
+    
+
+    internal void trailFootprints(Vector3 footprintDirection)
     {
-        Vector3 footprintDirection = Vector3.up;
-        if (Time.time - timeStart < timeToWander)
-        {
-            footprintDirection = initialDirection;
-            transform.position += speed * initialDirection*Time.deltaTime;
-            animator.SetBool(initialAnimationVariable, true);
-        }
-        else if (Time.time - timeStart < timeToWander*2)
-        {
-            footprintDirection = returnDirection;
-            transform.position += speed * returnDirection*Time.deltaTime;
-            animator.SetBool(returnAnimationVariable, true);
-        }
         if (Time.time > nextFootprint && hasBeenInspected)
         {
             GameObject footprint = Instantiate(footprintsPrefab, transform.position + new Vector3(0, -1.1f, 1), Quaternion.FromToRotation(Vector3.up, footprintDirection));
             nextFootprint = Time.time + 1;
             StartCoroutine(WaitAndDestory(10, footprint));
         }
-        else if (Time.time - timeStart >= timeToWander*2)
-        {
-            return false;
-        }
-        return true;
     }
 
     public void inspect()
@@ -129,6 +87,7 @@ public class CivilianControl : MonoBehaviour
             inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().color = Color.red;
             gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             gameLog.logText.text = "I was infected " + (int)timeSinceInfected + " seconds ago!";
+            StartCoroutine(BlinkSprite(GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>(), Color.red));
         }
         else
         {
@@ -156,6 +115,17 @@ public class CivilianControl : MonoBehaviour
         yield return new WaitForSeconds(secs);
         speechBubblePrefab.GetComponent<SpriteRenderer>().enabled = false;
         speechTextPrefab.GetComponent<TextMesh>().text = "";
-        
+    }
+
+    IEnumerator BlinkSprite(SpriteRenderer sprite, Color color)
+    {
+        Color origColor = sprite.color;
+        for (int i = 0; i < 4; i++)
+        {
+            sprite.color = color;
+            yield return new WaitForSeconds(0.2f);
+            sprite.color = origColor;
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 }
