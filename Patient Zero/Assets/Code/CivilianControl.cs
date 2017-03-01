@@ -99,6 +99,15 @@ public abstract class CivilianControl : MonoBehaviour
         hasBeenInspected = true;
     }
 
+	public void vaccinateNotPatientZero()
+	{
+		speechBubblePrefab.GetComponent<SpriteRenderer>().enabled = true;
+		inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = true;
+		inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
+		speechTextPrefab.GetComponent<TextMesh>().text = "I'm not Patient Zero!";
+		StartCoroutine(WaitAndRemoveSpeech(3));
+	}
+
     IEnumerator WaitAndDestory(float secs, GameObject obj)
     {
         for (float i = 0; i < 10; i++)

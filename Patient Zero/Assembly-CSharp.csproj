@@ -47,15 +47,20 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Code\CameraControl.cs" />
+     <Compile Include="Assets\Code\ChangeScene.cs" />
      <Compile Include="Assets\Code\CivilianControl.cs" />
      <Compile Include="Assets\Code\DiseaseControl.cs" />
      <Compile Include="Assets\Code\DiseaseVisionItem.cs" />
      <Compile Include="Assets\Code\GameLog.cs" />
+     <Compile Include="Assets\Code\HeartItem.cs" />
      <Compile Include="Assets\Code\ItemControl.cs" />
      <Compile Include="Assets\Code\PlayerControl.cs" />
      <Compile Include="Assets\Code\PlayerLog.cs" />
      <Compile Include="Assets\Code\PlayerStats.cs" />
+     <Compile Include="Assets\Code\RoamCivilian.cs" />
+     <Compile Include="Assets\Code\SpawnController.cs" />
      <Compile Include="Assets\Code\Timer.cs" />
+     <Compile Include="Assets\Code\WanderCivilian.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
