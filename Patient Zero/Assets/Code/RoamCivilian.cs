@@ -8,18 +8,17 @@ public class RoamCivilian : CivilianControl
 
 
     private bool reachedGoal = true;
-    private Vector3 goal;
-    private Vector3 direction;
+    public Vector3 goal;
+    public Vector3 direction;
 
     internal override void engageBehavior()
     {
         if (reachedGoal)
         {
             goal = SpawnController.FindFreeLocation(1, true);
-            direction = goal - transform.position;
-            direction = direction/direction.magnitude;
             reachedGoal = false;
         }
+        direction = (goal - transform.position).normalized;
         Vector3 pointedDirection = findNearestDirection(direction);
         trailFootprints(pointedDirection);
         if (pointedDirection == Vector3.up)
