@@ -128,12 +128,12 @@ public abstract class CivilianControl : MonoBehaviour
 
     IEnumerator BlinkSprite(SpriteRenderer sprite, Color color)
     {
-        Color origColor = sprite.color;
+        
         for (int i = 0; i < 4; i++)
         {
             sprite.color = color;
             yield return new WaitForSeconds(0.2f);
-            sprite.color = origColor;
+			sprite.color = Color.white;
             yield return new WaitForSeconds(0.2f);
         }
     }
