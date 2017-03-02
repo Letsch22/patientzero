@@ -99,6 +99,15 @@ public abstract class CivilianControl : MonoBehaviour
         hasBeenInspected = true;
     }
 
+	public void vaccinateNotPatientZero()
+	{
+		speechBubblePrefab.GetComponent<SpriteRenderer>().enabled = true;
+		inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = true;
+		inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
+		speechTextPrefab.GetComponent<TextMesh>().text = "I'm not Patient Zero!";
+		StartCoroutine(WaitAndRemoveSpeech(3));
+	}
+
     IEnumerator WaitAndDestory(float secs, GameObject obj)
     {
         for (float i = 0; i < 10; i++)
@@ -119,12 +128,12 @@ public abstract class CivilianControl : MonoBehaviour
 
     IEnumerator BlinkSprite(SpriteRenderer sprite, Color color)
     {
-        Color origColor = sprite.color;
+        
         for (int i = 0; i < 4; i++)
         {
             sprite.color = color;
             yield return new WaitForSeconds(0.2f);
-            sprite.color = origColor;
+			sprite.color = Color.white;
             yield return new WaitForSeconds(0.2f);
         }
     }

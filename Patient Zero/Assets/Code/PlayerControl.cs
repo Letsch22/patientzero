@@ -64,7 +64,8 @@ public class PlayerControl : MonoBehaviour
             else if (closestCivilian != null)
             {
                 playerStats.useVaccine();
-                gameLog.logText.text = "I'm not Patient Zero!";
+				closestCivilian.GetComponent<CivilianControl> ().vaccinateNotPatientZero ();
+//                gameLog.logText.text = "I'm not Patient Zero!";
             }
         }
     }
