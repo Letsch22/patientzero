@@ -17,10 +17,17 @@ public class DiseaseControl : MonoBehaviour
         startTimer = FindObjectOfType<Timer>().gameObject.GetComponent<Timer>().time;
         civilians = FindObjectsOfType<CivilianControl>();
 	    spreadRate = startTimer/((float)civilians.Length - 1f);
-	    patientZeroIndex = Random.Range(0, civilians.Length);
+	    float distanceToPatientZero = 0;
+	    PlayerControl player = FindObjectOfType<PlayerControl>();
+	    while (distanceToPatientZero < 40)
+	    {
+            patientZeroIndex = Random.Range(0, civilians.Length);
+	        distanceToPatientZero = Vector3.Distance(civilians[patientZeroIndex].transform.position,
+	            player.transform.position);
+	    }
+	    
         civilians[patientZeroIndex].hasDisease = true;
 	    civilians[patientZeroIndex].GetComponent<CivilianControl>().isPatientZero = true;
-//	    civilians[patientZeroIndex].GetComponent<SpriteRenderer>().color = Color.green;
 		infectedCivilians = new List<CivilianControl>();
 		infectedCivilians.Add (civilians [patientZeroIndex]);
 	}

@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
 {
     public Text timerLabel;
     public Text gameOverText;
+    public static float startTime;
     public float time;
 	private bool hasSpawnedDiseaseVision;
     private bool hasSpawnedHeart;
@@ -21,9 +22,9 @@ public class Timer : MonoBehaviour
 
     internal void Awake()
     {
-//		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(2, 11.5f, 1));
-        time = 240f;
-		timerBar = GameObject.FindGameObjectWithTag ("TimerBar").GetComponent<Image>();
+        startTime = 240f;
+        time = startTime;
+        timerBar = GameObject.FindGameObjectWithTag ("TimerBar").GetComponent<Image>();
 		timerBar.fillAmount = 0;
         playerStats = FindObjectOfType<PlayerStats>();
     }
@@ -33,7 +34,7 @@ public class Timer : MonoBehaviour
         
         time -= Time.deltaTime;
 
-		timerBar.fillAmount = 1 - (time / 240f);
+		timerBar.fillAmount = 1 - (time / startTime);
 
         var minutes = Mathf.Floor(time/60); 
         var seconds = time%60; 
