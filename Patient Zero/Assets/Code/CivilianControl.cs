@@ -7,6 +7,7 @@ public abstract class CivilianControl : MonoBehaviour
     public bool isPatientZero;
     public bool hasDisease;
     public bool hasBeenInspected = false;
+    private bool hasBeenVaccinated = false;
     public float timeSinceInfected = 0f;
     public float ForwardSpeed = 5f;
     private float nextFootprint;
@@ -35,7 +36,7 @@ public abstract class CivilianControl : MonoBehaviour
     }
 	
 	internal void Update () {
-	    if (hasDisease)
+	    if (hasDisease || hasBeenVaccinated)
 	    {
 	        timeSinceInfected += Time.deltaTime;
 	        speechBubblePrefab.gameObject.transform.position = transform.position + new Vector3(4.5f, 4.8f, -1f);
@@ -48,10 +49,7 @@ public abstract class CivilianControl : MonoBehaviour
             speechTextPrefab.gameObject.transform.position = transform.position + new Vector3(-2, 7.5f, -2f);
 	        speechBubblePrefab.transform.localScale = healthyBubbleScale;
 	    }
-	    if (hasBeenInspected)
-	    {
-	        inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
-	    }
+	    inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
 	    
         animator.SetBool("movingUp", false);
         animator.SetBool("movingRight", false);
@@ -101,6 +99,7 @@ public abstract class CivilianControl : MonoBehaviour
 
 	public void vaccinateNotPatientZero()
 	{
+	    hasBeenVaccinated = true;
 		speechBubblePrefab.GetComponent<SpriteRenderer>().enabled = true;
 		inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = true;
 		inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
