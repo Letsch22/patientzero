@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: d029f223655694720ac617dcd5022aba
-timeCreated: 1488673912
+guid: e355a2c6959276b43baabde39c13048e
+timeCreated: 1488676006
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: movingwalkway
-    21300002: pokemoncenterfloor
+    21300000: wallfront
+    21300002: wallside
+    21300004: megawall
+    21300006: megawall2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -72,26 +74,52 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: movingwalkway
+      name: wallfront
       rect:
         serializedVersion: 2
-        x: 61
-        y: 261
-        width: 6
-        height: 32
+        x: 106
+        y: 68
+        width: 30
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: pokemoncenterfloor
+      name: wallside
       rect:
         serializedVersion: 2
-        x: 147
-        y: 254
-        width: 48
-        height: 40
+        x: 105
+        y: 95
+        width: 8
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: megawall
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 147
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: megawall2
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 73
+        width: 9
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
