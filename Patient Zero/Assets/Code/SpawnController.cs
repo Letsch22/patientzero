@@ -9,6 +9,7 @@ public class SpawnController : MonoBehaviour {
     public static float YMin;
     public static float YMax;
     public static float roamYMax;
+    public static float roamYMin;
 
     internal void Start()
     {
@@ -17,16 +18,22 @@ public class SpawnController : MonoBehaviour {
         YMax = 39f;
         XMax = 86f;
         roamYMax = 9f;
+        roamYMin = -45f;
     }
 
     public static Vector2 FindFreeLocation(float radius, bool roam)
     {
         float currYMax = YMax;
-        if (roam) currYMax = roamYMax;
-        Vector2 origin = new Vector2(Random.Range(XMin, XMax), Random.Range(YMin, currYMax));
+        float currYMin = YMin;
+        if (roam)
+        {
+            currYMax = roamYMax;
+            currYMin = roamYMin;
+        }
+        Vector2 origin = new Vector2(Random.Range(XMin, XMax), Random.Range(currYMin, currYMax));
         while (Physics2D.CircleCast(origin, radius, new Vector2()).collider != null)
         {
-            origin = new Vector2(Random.Range(XMin, XMax), Random.Range(YMin, currYMax));
+            origin = new Vector2(Random.Range(XMin, XMax), Random.Range(currYMin, currYMax));
         }
         return origin;
     }

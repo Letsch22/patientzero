@@ -1,11 +1,19 @@
 fileFormatVersion: 2
 guid: d029f223655694720ac617dcd5022aba
-timeCreated: 1488673912
+timeCreated: 1488691540
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: movingwalkway
     21300002: pokemoncenterfloor
+    21300004: pokemon center textures_0
+    21300006: plant
+    21300008: red seat
+    21300010: yellow seat
+    21300012: table
+    21300014: counter
+    21300016: store racks wall
+    21300018: store racks block
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -92,6 +100,110 @@ TextureImporter:
         y: 254
         width: 48
         height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pokemon center textures_0
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 247
+        width: 3
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: plant
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 223
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: red seat
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 438
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: yellow seat
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 454
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: table
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 439
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: counter
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 284
+        width: 48
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: store racks wall
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 324
+        width: 64
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: store racks block
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 252
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 0bce01a0a9ead4b2bb6176e84bb573f5
-timeCreated: 1486528157
+guid: 82bebebcab53aa846812a4ee334b83b8
+timeCreated: 1488689830
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: tanksheet_0
-    21300002: wall
+  fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -42,7 +40,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 84
+  spritePixelsToUnits: 10000
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -70,20 +68,7 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: wall
-      rect:
-        serializedVersion: 2
-        x: 588
-        y: 0
-        width: 84
-        height: 84
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
+    sprites: []
     outline: []
   spritePackingTag: 
   userData: 
