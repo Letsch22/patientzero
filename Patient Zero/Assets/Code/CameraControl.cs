@@ -14,7 +14,7 @@ public class CameraControl : MonoBehaviour {
 	}
 
     private void ZoomOut(){
-        if (Camera.main.orthographicSize < 52)
+        if (Camera.main.orthographicSize < 25)
         {
             Camera.main.orthographicSize++;
         }
