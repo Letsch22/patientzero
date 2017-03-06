@@ -7,6 +7,7 @@ public abstract class CivilianControl : MonoBehaviour
     public bool isPatientZero;
     public bool hasDisease;
     public bool hasBeenInspected = false;
+    public bool isFrozen = false;
     private bool hasBeenVaccinated = false;
     public float timeSinceInfected = 0f;
     public float ForwardSpeed = 5f;
@@ -55,7 +56,7 @@ public abstract class CivilianControl : MonoBehaviour
         animator.SetBool("movingRight", false);
         animator.SetBool("movingLeft", false);
         animator.SetBool("movingDown", false);
-        engageBehavior();
+        if (!isFrozen) engageBehavior();
 	}
 
     internal abstract void engageBehavior();

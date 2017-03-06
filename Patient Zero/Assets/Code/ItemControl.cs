@@ -7,8 +7,9 @@ public abstract class ItemControl : MonoBehaviour {
 	public abstract void UseItem ();
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake ()
+	{
+	    transform.position = SpawnController.FindFreeLocation(2, false);
 	}
 	
 	// Update is called once per frame
@@ -30,5 +31,6 @@ public abstract class ItemControl : MonoBehaviour {
 	{
 		GetComponent<SpriteRenderer> ().enabled = enabled;
 		GetComponent<CircleCollider2D> ().enabled = enabled;
+	    transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
 	}
 }

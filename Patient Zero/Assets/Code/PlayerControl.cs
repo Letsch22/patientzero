@@ -63,7 +63,6 @@ public class PlayerControl : MonoBehaviour
             {
                 playerStats.useVaccine();
 				closestCivilian.GetComponent<CivilianControl> ().vaccinateNotPatientZero ();
-//                gameLog.logText.text = "I'm not Patient Zero!";
             }
         }
     }
@@ -95,12 +94,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
         return closestCivilian;
-    }
-
-
-    internal void OnTriggerEnter2D(Collider2D obj)
-    {
-
     }
 
 }

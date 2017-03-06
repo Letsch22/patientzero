@@ -8,7 +8,14 @@ public class HeartItem : ItemControl {
     public override void UseItem()
     {
         PlayerStats playerStats = FindObjectOfType<PlayerStats>();
-        playerStats.reduceHealth(-10);
+        if (playerStats.health.Equals(90))
+        {
+            playerStats.reduceHealth(-10);
+        }
+        else
+        {
+            playerStats.reduceHealth(-20);
+        }
     }
 
     void Start () {

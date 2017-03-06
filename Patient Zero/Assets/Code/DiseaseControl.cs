@@ -19,7 +19,7 @@ public class DiseaseControl : MonoBehaviour
 	    spreadRate = startTimer/((float)civilians.Length - 1f);
 	    float distanceToPatientZero = 0;
 	    PlayerControl player = FindObjectOfType<PlayerControl>();
-	    while (distanceToPatientZero < 40)
+	    while (distanceToPatientZero < 35)
 	    {
             patientZeroIndex = Random.Range(0, civilians.Length);
 	        distanceToPatientZero = Vector3.Distance(civilians[patientZeroIndex].transform.position,
