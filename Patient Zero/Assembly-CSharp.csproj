@@ -53,7 +53,10 @@
      <Compile Include="Assets\Code\DiseaseVisionItem.cs" />
      <Compile Include="Assets\Code\GameLog.cs" />
      <Compile Include="Assets\Code\HeartItem.cs" />
+     <Compile Include="Assets\Code\IdleCivilian.cs" />
      <Compile Include="Assets\Code\ItemControl.cs" />
+     <Compile Include="Assets\Code\MenuMusic.cs" />
+     <Compile Include="Assets\Code\MovingWalkway.cs" />
      <Compile Include="Assets\Code\PlayerControl.cs" />
      <Compile Include="Assets\Code\PlayerLog.cs" />
      <Compile Include="Assets\Code\PlayerStats.cs" />
