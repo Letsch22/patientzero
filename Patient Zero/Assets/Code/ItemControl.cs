@@ -22,6 +22,7 @@ public abstract class ItemControl : MonoBehaviour {
 		if (playerControl != null) {
 			EnablePickup (false);
 			UseItem ();
+			GetComponent<AudioSource> ().Play ();
 		}
 	}
 

@@ -80,6 +80,7 @@ public abstract class CivilianControl : MonoBehaviour
         inspectedIndicatorPrefab.gameObject.transform.position = transform.position + new Vector3(0, 2.5f);
         if (hasDisease)
         {
+			GetComponents<AudioSource> ()[0].Play ();
             speechTextPrefab.GetComponent<TextMesh>().text = "I was infected " + (int)timeSinceInfected + "\nseconds ago!";
             StartCoroutine(WaitAndRemoveSpeech(5));
             inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().color = Color.red;
@@ -89,6 +90,7 @@ public abstract class CivilianControl : MonoBehaviour
         }
         else
         {
+			GetComponents<AudioSource> ()[1].Play ();
             speechTextPrefab.GetComponent<TextMesh>().text = "I'm healthy...";
             StartCoroutine(WaitAndRemoveSpeech(3));
             gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(33/255f, 64/255f, 156/255f);
@@ -99,6 +101,7 @@ public abstract class CivilianControl : MonoBehaviour
 
 	public void vaccinateNotPatientZero()
 	{
+		GetComponents<AudioSource> ()[2].Play ();
 	    hasBeenVaccinated = true;
 		speechBubblePrefab.GetComponent<SpriteRenderer>().enabled = true;
 		inspectedIndicatorPrefab.GetComponent<SpriteRenderer>().enabled = true;

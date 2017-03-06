@@ -9,13 +9,11 @@ public class PlayerControl : MonoBehaviour
     private Animator animator;
     private PlayerStats playerStats;
     private Timer timer;
-    private GameLog gameLog;
 
     internal void Start()
     {
         layerMask = ~layerMask;
         animator = GetComponent<Animator>();
-        gameLog = FindObjectOfType<GameLog>().GetComponent<GameLog>();
         playerStats = FindObjectOfType<PlayerStats>().GetComponent<PlayerStats>();
         timer = FindObjectOfType<Timer>().GetComponent<Timer>();
     }
